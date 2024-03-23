@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a1b4d19-8404-4b34-9dc5-0158a7a458a8" name="更改" comment="添加进度条">
+      <change afterPath="$PROJECT_DIR$/src/logger/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/rmSync.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logger.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +65,7 @@
     "Node.js.example.js.executor": "Run",
     "Node.js.index.js.executor": "Run",
     "Node.js.process.js.executor": "Run",
+    "Node.js.rmSync.js.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -67,19 +75,18 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.dev.executor": "Run",
+    "npm.rmSync.executor": "Run",
+    "npm.user.executor": "Run",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "ts.external.directory.path": "D:\\Code\\App\\WebStorm 2023.3.5\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Node.js.example.js">
+  <component name="RunManager" selected="npm.rmSync">
     <configuration name="example.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/progress-bar/example.js" working-dir="$PROJECT_DIR$/src/progress-bar">
       <method v="2" />
     </configuration>
-    <configuration name="index.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/progress-bar/index.js" working-dir="$PROJECT_DIR$/src/progress-bar">
-      <method v="2" />
-    </configuration>
-    <configuration name="process.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/process.js" working-dir="$PROJECT_DIR$/src">
+    <configuration name="rmSync.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/rmSync.js" working-dir="$PROJECT_DIR$/src">
       <method v="2" />
     </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -92,12 +99,33 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="rmSync" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="rmSync" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="user" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="user" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.rmSync" />
+        <item itemvalue="Node.js.rmSync.js" />
+        <item itemvalue="npm.user" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.example.js" />
-        <item itemvalue="Node.js.index.js" />
-        <item itemvalue="Node.js.process.js" />
       </list>
     </recent_temporary>
   </component>
@@ -110,7 +138,7 @@
       <option name="presentableId" value="Default" />
       <updated>1711113321734</updated>
       <workItem from="1711113322800" duration="15613000" />
-      <workItem from="1711164812864" duration="183000" />
+      <workItem from="1711164812864" duration="24325000" />
     </task>
     <task id="LOCAL-00001" summary="添加进度条">
       <option name="closed" value="true" />
@@ -152,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711164936958</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="添加进度条">
+      <option name="closed" value="true" />
+      <created>1711165022126</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1711165022126</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

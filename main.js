@@ -12,7 +12,7 @@ import axios from "axios";
 import moment from 'moment'
 import * as readline from 'node:readline/promises';
 import {stdin as input, stdout as output} from 'node:process';
-import {globalLogger} from "./logger.js";
+import {globalLogger} from "./src/logger/index.js";
 import {download} from "./src/download.js";
 import ProgressBar from './src/progress-bar/index.js'
 
@@ -21,11 +21,9 @@ const rl = readline.createInterface({input, output});
 const startTime = await rl.question('请输入开始时间（YYYYMMDD）：');
 const answer = await rl.question('请输入向前多少天：');
 
-console.log(`向前多少天: ${answer}`);
-
 rl.close();
 // 2.创建一个爬虫实例
-const myXCrawl = xCrawl({maxRetry: 3, intervalTime: {max: 2000, min: 1000}, timeout: 3000000})
+const myXCrawl = xCrawl({maxRetry: 3, intervalTime: {max: 2000, min: 1000}, timeout: 3000000,log:false})
 const configs = []
 const progressBarC = new ProgressBar()
 const getData = async (params) => {
@@ -36,20 +34,17 @@ const getData = async (params) => {
         }]
     })
     globalLogger.info(JSON.stringify(pageResults[0].data.data))
-    if(configs.findIndex(v=>v.id == params.date) == -1) {
+    if (configs.findIndex(v => v.id == params.date) == -1) {
         configs.push({
             id: params.date,
             duration: pageResults[0].data.data.rank_total,
             current: 0,
-            block:'█',
-            showNumber:true,
-            tip:{
-                0: '努力下载中……',
-                50:'下载一半啦，不要着急……',
-                75:'马上就下载完了……',
-                100:'下载完成'
+            block: '█',
+            showNumber: true,
+            tip: {
+                0: '努力下载中……', 50: '下载一半啦，不要着急……', 75: '马上就下载完了……', 100: '下载完成'
             },
-            color:'blue'
+            color: 'blue'
         })
         progressBarC.addConfig(configs)
     }
@@ -58,7 +53,7 @@ const getData = async (params) => {
             ...params, p: pageResults[0].data.data.next
         })
     }
-    await getImg({arr:pageResults[0].data.data.contents, index:0,from:params})
+    await getImg({arr: pageResults[0].data.data.contents, index: 0, from: params})
 }
 
 let date = moment(startTime).format('YYYYMMDD')
@@ -70,7 +65,7 @@ myXCrawl.startPolling({m: 1}, async (count, stopPolling) => {
     globalLogger.info(`count:${count}`)
     // 调用 crawlPage API 来爬取页面
     newDate = moment(date, 'YYYYMMDD').subtract(count, 'days').format('YYYYMMDD')
-    if(count > answer) return
+    if (count > answer) return
     getData({
         mode: 'daily', date: newDate, content: 'illust', p: 1, format: 'json'
     })
@@ -92,15 +87,15 @@ const getImg = async function ({arr, index, from}, suffix = '.png') {
             fileName: `${item.rank}${item.title.replaceAll('/', '-')}${suffix}`,
             fileArraybuffer: binaryData
         })
-        configs.find(v=>v.id === from.date).current += 1
-        configs.forEach(v=>{
+        configs.find(v => v.id === from.date).current += 1
+        configs.forEach(v => {
             config[v.id] = v.current
         })
         progressBarC.run(config)
         if (index < arr.length - 1) {
-            await getImg({arr, index: ++index,from})
+            await getImg({arr, index: ++index, from})
         }
     } catch (e) {
-        await getImg({arr, index,from}, '.jpg')
+        await getImg({arr, index, from}, '.jpg')
     }
 }
