@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5a1b4d19-8404-4b34-9dc5-0158a7a458a8" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/src/progress-bar/example.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/progress-bar/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/.6a7cb238fe4152bd34014f284ba201f3443088c8-audit.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/.6a7cb238fe4152bd34014f284ba201f3443088c8-audit.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/.a38e89903897b3c70415523079eeb786f212ee6e-audit.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/.a38e89903897b3c70415523079eeb786f212ee6e-audit.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/.c35d1ca0054b59b27ea5821f845a8a4723c86f11-audit.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/.c35d1ca0054b59b27ea5821f845a8a4723c86f11-audit.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/info-2024-03-22.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/info-2024-03-22.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/download.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/download.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/process.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/process.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Li-jt"
+  }
+}]]></component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="1e2ba608-f970-4379-9d7f-5f46174f2716" />
+        <option name="url" value="https://github.com/Li-jt/crawler.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2e2r4Kme2pu6MFUwiZ829Pt7uHQ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.example.js.executor": "Run",
+    "Node.js.index.js.executor": "Run",
+    "Node.js.process.js.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Node.js.example.js">
+    <configuration name="example.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/progress-bar/example.js" working-dir="$PROJECT_DIR$/src/progress-bar">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/progress-bar/index.js" working-dir="$PROJECT_DIR$/src/progress-bar">
+      <method v="2" />
+    </configuration>
+    <configuration name="process.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/process.js" working-dir="$PROJECT_DIR$/src">
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="Node.js.example.js" />
+        <item itemvalue="Node.js.index.js" />
+        <item itemvalue="Node.js.process.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="5a1b4d19-8404-4b34-9dc5-0158a7a458a8" name="更改" comment="" />
+      <created>1711113321734</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1711113321734</updated>
+      <workItem from="1711113322800" duration="15081000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

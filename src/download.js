@@ -4,11 +4,15 @@ import path from "path";
 
 export const download = async (data) => {
     const {filePath,fileName,fileArraybuffer} = data
-    if (!fs.existsSync(filePath)) {
-        mkdirsSync(filePath);
-    }
-    if (!fs.existsSync(`${filePath}${fileName}`)) {
-        fs.writeFileSync(`${filePath}${fileName}`, fileArraybuffer)
+    try{
+        if (!fs.existsSync(filePath)) {
+            mkdirsSync(filePath);
+        }
+        if (!fs.existsSync(`${filePath}${fileName}`)) {
+            fs.writeFileSync(`${filePath}${fileName}`, fileArraybuffer)
+        }
+    }catch (e) {
+        
     }
 }
 
