@@ -14,17 +14,24 @@ const isNotHidden = async (el) => await page.$eval(el, (elem) => {
     return elem.style.display !== 'none'
 })
 
+// 地址转换
+const addressConversion = (url) => {
+    return url.indexOf('_custom1200.jpg') > -1 ?
+        `https://i.pximg.net/img-original${url.slice(url.indexOf('/img/'), url.indexOf('_custom1200.jpg'))}.jpg` :
+        `https://i.pximg.net/img-original${url.slice(url.indexOf('/img/'), url.indexOf('_square1200.jpg'))}.jpg`
+}
+
 const doms = {
-    2:'.hdRpMN',
-    3:'.cDZIoX'
+    2: '.hdRpMN',
+    3: '.cDZIoX'
 }
 
 const rl = readline.createInterface({input, output});
 
 // const username = 'torino';
 let index = 1
-const isUserId = await rl.question('搜索方式(1:id;2:搜索;3:进入画师详情)：')
-if(isUserId == 1) {
+const isUserId = await rl.question('搜索方式(1:画师id;2:搜索;3:进入画师详情)：')
+if (isUserId == 1) {
     console.log('暂无开发此搜索')
     process.exit();
 }
@@ -101,7 +108,7 @@ const pages = () => {
             })))
             const apis = urls.map((item => {
                 return {
-                    url: item.url.indexOf('_custom1200.jpg') > -1 ? `https://i.pximg.net/img-original${item.url.slice(item.url.indexOf('/img/'), item.url.indexOf('_custom1200.jpg'))}.jpg` : `https://i.pximg.net/img-original${item.url.slice(item.url.indexOf('/img/'), item.url.indexOf('_square1200.jpg'))}.jpg`,
+                    url: addressConversion(item.url),
                     maxRetry: 1,
                     method: 'GET',
                     responseType: 'arraybuffer',
@@ -130,13 +137,11 @@ const pages = () => {
                     return;
                 }
                 files.forEach(item => {
-                    //匹配后缀为 txt 名字包含 a 的文件
                     if (item.indexOf('.html') > -1) {
                         fs.rmSync(path.join(`${process.cwd()}/uploadUser/${username}/`, item))
                     }
                 })
             })
-            console.log(await isNotHidden('.kYtoqc a:last-child'))
             if (await isNotHidden('.kYtoqc a:last-child')) {
                 await page.click('.kYtoqc a:last-child')
                 await page.waitForSelector(doms[isUserId])

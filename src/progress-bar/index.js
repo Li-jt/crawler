@@ -26,6 +26,19 @@ class ProgressBar {
         })
     }
 
+
+    updataDuration({id,duration}){
+        this.configs.find(v=>v.id === id).duration = duration;
+    }
+
+    getConfigs(){{
+        return this.configs
+    }}
+
+    getComeToAnEnd(){
+        return  this.configs.every((v)=>v.duration === v.current)
+    }
+
     run(props) {
         let str = ''
         if (!this.configs.length) return;
@@ -37,14 +50,14 @@ class ProgressBar {
             let tipList = Object.keys(tip).sort((a, b) => b - a);
             let showTip = tip[0];
             const step = duration / 100;
-            const len = Math.ceil(current / step);
+            const len = (current / step).toFixed(2);
             for (let i = 0; i < tipList.length; i++) {
-                if (len >= tipList[i]) {
+                if (Number(len) >= tipList[i]) {
                     showTip = tip[tipList[i]];
                     break;
                 }
             }
-            str += chalk[color](block.repeat(Math.floor(len / 2)), (showNumber ? (len + '% ') : '') + showTip) + '\n'
+            str += chalk[color](config.id + ':' + block.repeat(Math.floor(len / 2)), (showNumber ? (len + '% ') : '') + showTip) + '\n'
         })
         stdout(str);
     }

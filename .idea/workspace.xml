@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a1b4d19-8404-4b34-9dc5-0158a7a458a8" name="更改" comment="搜索">
+      <change afterPath="$PROJECT_DIR$/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/.6a7cb238fe4152bd34014f284ba201f3443088c8-audit.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/.6a7cb238fe4152bd34014f284ba201f3443088c8-audit.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/.a38e89903897b3c70415523079eeb786f212ee6e-audit.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/.a38e89903897b3c70415523079eeb786f212ee6e-audit.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/.c35d1ca0054b59b27ea5821f845a8a4723c86f11-audit.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/.c35d1ca0054b59b27ea5821f845a8a4723c86f11-audit.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logger/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/logger/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/progress-bar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/progress-bar/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/user.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,9 +68,11 @@
     "Node.js.index.js.executor": "Run",
     "Node.js.process.js.executor": "Run",
     "Node.js.rmSync.js.executor": "Run",
+    "Node.js.test.js.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -75,11 +86,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="npm.rmSync">
-    <configuration name="example.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/progress-bar/example.js" working-dir="$PROJECT_DIR$/src/progress-bar">
+  <component name="RunManager" selected="Node.js.test.js">
+    <configuration name="rmSync.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/rmSync.js" working-dir="$PROJECT_DIR$/src">
       <method v="2" />
     </configuration>
-    <configuration name="rmSync.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/rmSync.js" working-dir="$PROJECT_DIR$/src">
+    <configuration name="test.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -114,11 +125,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="Node.js.test.js" />
         <item itemvalue="npm.rmSync" />
         <item itemvalue="Node.js.rmSync.js" />
         <item itemvalue="npm.user" />
-        <item itemvalue="npm.dev" />
-        <item itemvalue="Node.js.example.js" />
       </list>
     </recent_temporary>
   </component>
@@ -131,7 +142,9 @@
       <option name="presentableId" value="Default" />
       <updated>1711113321734</updated>
       <workItem from="1711113322800" duration="15613000" />
-      <workItem from="1711164812864" duration="25275000" />
+      <workItem from="1711164812864" duration="25975000" />
+      <workItem from="1711251536232" duration="667000" />
+      <workItem from="1711252212842" duration="14089000" />
     </task>
     <task id="LOCAL-00001" summary="添加进度条">
       <option name="closed" value="true" />
@@ -213,7 +226,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711191332750</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="搜索">
+      <option name="closed" value="true" />
+      <created>1711191536631</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1711191536631</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -15,6 +15,7 @@ import {stdin as input, stdout as output} from 'node:process';
 import {globalLogger} from "./src/logger/index.js";
 import {download} from "./src/download.js";
 import ProgressBar from './src/progress-bar/index.js'
+import {nameProcessing} from "./utils/index.js";
 
 const rl = readline.createInterface({input, output});
 
@@ -23,21 +24,21 @@ const answer = await rl.question('请输入向前多少天：');
 
 rl.close();
 // 2.创建一个爬虫实例
-const myXCrawl = xCrawl({maxRetry: 3, intervalTime: {max: 2000, min: 1000}, timeout: 3000000,log:false})
+const myXCrawl = xCrawl({
+    maxRetry: 3, intervalTime: {max: 2000, min: 1000}, timeout: 3000000, log: false, enableRandomFingerprint: true
+})
 const configs = []
 const progressBarC = new ProgressBar()
 const getData = async (params) => {
     globalLogger.info(JSON.stringify(params))
     const pageResults = await myXCrawl.crawlData({
-        enableRandomFingerprint: true, targets: [{
-            url: 'https://www.pixiv.net/ranking.php', method: 'GET', params
-        }]
+        url: 'https://www.pixiv.net/ranking.php', method: 'GET', params, timeout: 300000
     })
-    globalLogger.info(JSON.stringify(pageResults[0].data.data))
+    globalLogger.info(JSON.stringify(pageResults))
     if (configs.findIndex(v => v.id == params.date) == -1) {
         configs.push({
             id: params.date,
-            duration: pageResults[0].data.data.rank_total,
+            duration: pageResults.data.data.contents.length,
             current: 0,
             block: '█',
             showNumber: true,
@@ -47,33 +48,38 @@ const getData = async (params) => {
             color: 'blue'
         })
         progressBarC.addConfig(configs)
-    }
-    if (pageResults[0].data.data.next) {
-        await getData({
-            ...params, p: pageResults[0].data.data.next
+    } else {
+        progressBarC.updataDuration({
+            id: params.date,
+            duration: configs.find(v => v.id == params.date).duration + pageResults.data.data.contents.length
         })
     }
-    await getImg({arr: pageResults[0].data.data.contents, index: 0, from: params})
+    if (pageResults.data.data.next) {
+        await getData({
+            ...params, p: pageResults.data.data.next
+        })
+    }
+    await getImg({arr: pageResults.data.data.contents, index: 0, from: params})
 }
 
 let date = moment(startTime).format('YYYYMMDD')
 // 3.设置爬取任务
 // 调用 startPolling API 开始轮询功能，每隔一天会调用回调函数
 let newDate = date
+let num = 0
+
 myXCrawl.startPolling({m: 1}, async (count, stopPolling) => {
-    count -= 1
-    globalLogger.info(`count:${count}`)
-    // 调用 crawlPage API 来爬取页面
-    newDate = moment(date, 'YYYYMMDD').subtract(count, 'days').format('YYYYMMDD')
-    if (count > answer) return
-    getData({
+    globalLogger.info(`count:${num}`)
+    newDate = moment(date, 'YYYYMMDD').subtract(num, 'days').format('YYYYMMDD')
+    if (++num > answer) return
+    await getData({
         mode: 'daily', date: newDate, content: 'illust', p: 1, format: 'json'
     })
 })
 
 let config = {}
 const getImg = async function ({arr, index, from}, suffix = '.png') {
-    let item = arr[index]
+    let item = JSON.parse(JSON.stringify(arr[index]))
     let url = `https://i.pximg.net/img-original${item.url.slice(item.url.indexOf('/img/'), item.url.indexOf('_master'))}`
     try {
         const res = await axios.get(url + suffix, {
@@ -81,19 +87,25 @@ const getImg = async function ({arr, index, from}, suffix = '.png') {
             headers: {'Referer': `https://www.pixiv.net/artworks/${item.illust_id}`},
             verify: false
         })
-        const binaryData = new Buffer.from(res.data);
-        await download({
-            filePath: `./upload/${moment(item.illust_upload_timestamp * 1000).format('YYYYMMDD')}/`,
-            fileName: `${item.rank}${item.title.replaceAll('/', '-')}${suffix}`,
-            fileArraybuffer: binaryData
-        })
-        configs.find(v => v.id === from.date).current += 1
-        configs.forEach(v => {
-            config[v.id] = v.current
-        })
-        progressBarC.run(config)
-        if (index < arr.length - 1) {
-            await getImg({arr, index: ++index, from})
+        if (res.status == 200) {
+            const binaryData = new Buffer.from(res.data);
+            await download({
+                filePath: `./upload/${from.date}/`,
+                fileName: `${nameProcessing(`${item.rank}【${item.title.replaceAll('/', '-')}】`)}${suffix}`,
+                fileArraybuffer: binaryData
+            })
+            configs.find(v => v.id === from.date).current += 1
+            configs.forEach(v => {
+                config[v.id] = v.current
+            })
+            globalLogger.debug(JSON.stringify(config))
+            progressBarC.run(config)
+            if(progressBarC.getComeToAnEnd()){
+                process.exit();
+            }
+            if (index < arr.length - 1) {
+                await getImg({arr, index: ++index, from})
+            }
         }
     } catch (e) {
         await getImg({arr, index, from}, '.jpg')

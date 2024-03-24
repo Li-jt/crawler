@@ -25,6 +25,11 @@ const globalLogger = createLogger({
             level: "error",
             ...defaultOptions,
         }),
+        new transports.DailyRotateFile({
+            filename: "logs/debug-%DATE%.log",
+            level: "debug",
+            ...defaultOptions,
+        }),
     ],
 });
 const authLogger = createLogger({
