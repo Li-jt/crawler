@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a1b4d19-8404-4b34-9dc5-0158a7a458a8" name="更改" comment="搜索">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rmSync.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/rmSync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +68,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/Code/code/node/crawler",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -73,12 +77,15 @@
     "npm.dev.executor": "Run",
     "npm.rmSync.executor": "Run",
     "npm.user.executor": "Run",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "settings.editor.selected.configurable": "preferences.fileTypes",
+    "ts.external.directory.path": "D:\\Code\\App\\WebStorm 2023.3.5\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Code\code\node\crawler" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -122,8 +129,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.rmSync" />
         <item itemvalue="npm.user" />
+        <item itemvalue="npm.rmSync" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.test.js" />
         <item itemvalue="Node.js.rmSync.js" />

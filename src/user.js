@@ -5,6 +5,7 @@ import path from "path";
 import fs from "node:fs";
 import dotenv from 'dotenv'
 import {addressConversion} from "../utils/index.js";
+
 dotenv.config()
 
 // 判断元素是否可见
@@ -13,8 +14,7 @@ const isNotHidden = async (el) => await page.$eval(el, (elem) => {
 })
 
 const doms = {
-    2: '.hdRpMN',
-    3: '.cDZIoX'
+    2: 'section ul.hdRpMN', 3: '.cDZIoX'
 }
 
 const rl = readline.createInterface({input, output});
@@ -46,7 +46,7 @@ const myXCrawl = xCrawl({
 
 const {data: {browser, page}} = await myXCrawl.crawlPage({
     url: 'https://www.pixiv.net/',
-    viewport: {width: 1920, height: 1080},
+    viewport: {width: 1920 * 2, height: 1080 * 2},
     timeout: 3000000,
     onCrawlItemComplete(crawlPageSingleResult) {
         const {page} = crawlPageSingleResult.data
@@ -56,17 +56,15 @@ const {data: {browser, page}} = await myXCrawl.crawlPage({
 })
 const isPhpsessid = await fs.existsSync('PHPSESSID.txt')
 let read = ''
-if(isPhpsessid){
+if (isPhpsessid) {
     read = fs.readFileSync('PHPSESSID.txt').toString()
 }
-if(read){
+if (read) {
     await page.setCookie({
-        name: 'PHPSESSID',
-        value: read,
-        domain: '.pixiv.net'
+        name: 'PHPSESSID', value: read, domain: '.pixiv.net'
     })
     await page.reload()
-}else{
+} else {
     // 等待页面元素出现
     await page.waitForSelector('.signup-form')
 
@@ -81,10 +79,10 @@ if(read){
     await page.click('.hhGKQA')
 }
 // 搜索框
-await page.waitForSelector('input[placeholder="搜索作品"]');
+await page.waitForSelector('input[placeholder="搜索作品"]', {timeout: 3000000});
 
 const PHPSESSID = await page.cookies()
-await fs.writeFileSync('PHPSESSID.txt',PHPSESSID.find(v=>v.name === 'PHPSESSID').value,{flag:'w'})
+await fs.writeFileSync('PHPSESSID.txt', PHPSESSID.find(v => v.name === 'PHPSESSID').value, {flag: 'w'})
 
 // 输入信息
 await page.type('input[placeholder="搜索作品"]', username)
@@ -114,19 +112,43 @@ const pages = () => {
     return new Promise(resolve => {
         setTimeout(async () => {
             // 获取页面图片的 URL
-            const urls = await page.$$eval('ul img', (el) => el.map(v => ({
-                url: v.getAttribute('src'), title: v.getAttribute('alt'),
+            const urls = await page.$$eval('section ul a.iUsZyY img', (el) => el.map(v => ({
+                url: v.getAttribute('src'), title: v.getAttribute('alt'), num: 0
             })))
-            const apis = urls.map((item => {
-                return {
-                    url: addressConversion(item.url),
-                    maxRetry: 1,
-                    method: 'GET',
-                    responseType: 'arraybuffer',
-                    headers: {'Referer': `https://www.pixiv.net/artworks/${item.url.slice(item.url.lastIndexOf('/') + 1, item.url.lastIndexOf('_p0'))}`},
-                    verify: false,
+            const as = await page.$$('section ul a.iUsZyY')
+            for (const v of as) {
+                const i = as.indexOf(v);
+                const dom1 = await v.$('div:nth-child(2)')
+                const dom2 = await dom1.$('div:nth-child(2)')
+                let dom3 = 0
+                if (dom2) {
+                    dom3 = await v.$eval('div>span:nth-child(2)', el => el.innerText)
+                    urls[i].num = Number(dom3)
                 }
-            }))
+            }
+            const apis = urls.map((item => {
+                if (item.num) {
+                    return [...new Array(item.num).keys()].map((v,i) => {
+                        return {
+                            url: addressConversion(item.url, i),
+                            maxRetry: 1,
+                            method: 'GET',
+                            responseType: 'arraybuffer',
+                            headers: {'Referer': `https://www.pixiv.net/artworks/${item.url.slice(item.url.lastIndexOf('/') + 1, item.url.lastIndexOf('_p0'))}`},
+                            verify: false,
+                        }
+                    })
+                } else {
+                    return {
+                        url: addressConversion(item.url),
+                        maxRetry: 1,
+                        method: 'GET',
+                        responseType: 'arraybuffer',
+                        headers: {'Referer': `https://www.pixiv.net/artworks/${item.url.slice(item.url.lastIndexOf('/') + 1, item.url.lastIndexOf('_p0'))}`},
+                        verify: false,
+                    }
+                }
+            })).flat(Infinity)
             const data = await myXCrawl.crawlFile({
                 targets: apis, storeDirs: `${process.cwd()}/uploadUser/${username}`, // 存放文件夹
             })
@@ -139,7 +161,7 @@ const pages = () => {
             })
 
             await myXCrawl.crawlFile({
-                targets: apis2, storeDirs: `${process.cwd()}/uploadUser/${username}` // 存放文件夹
+                targets: apis2, storeDirs: `${process.cwd()}/uploadUser/${username}`, // 存放文件夹
             })
 
             // 文件所在目录

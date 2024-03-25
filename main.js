@@ -35,10 +35,22 @@ const getData = async (params) => {
         url: 'https://www.pixiv.net/ranking.php', method: 'GET', params, timeout: 300000
     })
     globalLogger.info(JSON.stringify(pageResults))
+    const list = pageResults.data.data.contents.map((item) => {
+        if(item.illust_page_count > 1){
+            return [...new Array(item.illust_page_count).keys()].map((_, i) => {
+                return {
+                    ...item,
+                    url: item.url.replace('_p0',`_p${i}`)
+                }
+            })
+        }else{
+            return item
+        }
+    }).flat(Infinity)
     if (configs.findIndex(v => v.id == params.date) == -1) {
         configs.push({
             id: params.date,
-            duration: pageResults.data.data.contents.length,
+            duration: list.length,
             current: 0,
             block: '█',
             showNumber: true,
@@ -51,7 +63,7 @@ const getData = async (params) => {
     } else {
         progressBarC.updataDuration({
             id: params.date,
-            duration: configs.find(v => v.id == params.date).duration + pageResults.data.data.contents.length
+            duration: configs.find(v => v.id == params.date).duration + list.length
         })
     }
     if (pageResults.data.data.next) {
@@ -59,7 +71,7 @@ const getData = async (params) => {
             ...params, p: pageResults.data.data.next
         })
     }
-    await getImg({arr: pageResults.data.data.contents, index: 0, from: params})
+    await getImg({arr: list, index: 0, from: params})
 }
 
 let date = moment(startTime).format('YYYYMMDD')
