@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "node ./main.js",
+    "user": "node ./src/user.js",
+    "rmSync": "node ./src/rmSync.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,7 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.6.8",
+    "chalk": "^5.3.0",
     "moment": "^2.30.1",
+    "single-line-log": "^1.1.2",
     "winston": "^3.12.0",
     "winston-daily-rotate-file": "^5.0.0",
     "x-crawl": "^9.0.0"
