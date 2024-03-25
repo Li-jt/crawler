@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5a1b4d19-8404-4b34-9dc5-0158a7a458a8" name="更改" comment="搜索">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/.6a7cb238fe4152bd34014f284ba201f3443088c8-audit.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/.6a7cb238fe4152bd34014f284ba201f3443088c8-audit.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/.a38e89903897b3c70415523079eeb786f212ee6e-audit.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/.a38e89903897b3c70415523079eeb786f212ee6e-audit.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/.c35d1ca0054b59b27ea5821f845a8a4723c86f11-audit.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/.c35d1ca0054b59b27ea5821f845a8a4723c86f11-audit.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/user.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711191536631</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="搜索">
+      <option name="closed" value="true" />
+      <created>1711339035365</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1711339035365</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,8 +254,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="添加进度条" />
-    <MESSAGE value="搜索" />
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="搜索" />
+    <option name="LAST_COMMIT_MESSAGE" value="搜索" />
   </component>
 </project>
