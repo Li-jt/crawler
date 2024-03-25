@@ -4,19 +4,13 @@ import {stdin as input, stdout as output} from 'node:process';
 import path from "path";
 import fs from "node:fs";
 import dotenv from 'dotenv'
+import {addressConversion} from "../utils/index.js";
 dotenv.config()
 
 // 判断元素是否可见
 const isNotHidden = async (el) => await page.$eval(el, (elem) => {
     return elem.style.display !== 'none'
 })
-
-// 地址转换
-const addressConversion = (url) => {
-    return url.indexOf('_custom1200.jpg') > -1 ?
-        `https://i.pximg.net/img-original${url.slice(url.indexOf('/img/'), url.indexOf('_custom1200.jpg'))}.jpg` :
-        `https://i.pximg.net/img-original${url.slice(url.indexOf('/img/'), url.indexOf('_square1200.jpg'))}.jpg`
-}
 
 const doms = {
     2: '.hdRpMN',
@@ -60,21 +54,38 @@ const {data: {browser, page}} = await myXCrawl.crawlPage({
         page.close()
     }
 })
-// 等待页面元素出现
-await page.waitForSelector('.signup-form')
+const isPhpsessid = await fs.existsSync('PHPSESSID.txt')
+let read = ''
+if(isPhpsessid){
+    read = fs.readFileSync('PHPSESSID.txt').toString()
+}
+if(read){
+    await page.setCookie({
+        name: 'PHPSESSID',
+        value: read,
+        domain: '.pixiv.net'
+    })
+    await page.reload()
+}else{
+    // 等待页面元素出现
+    await page.waitForSelector('.signup-form')
 
-await page.click('.signup-form__submit--login')
+    await page.click('.signup-form__submit--login')
 
 // 等待页面元素出现
-await page.waitForSelector('.brNKPG')
+    await page.waitForSelector('.brNKPG')
 // 登录
-await page.type('input[autocomplete="username"]', account);
-await page.type('input[autocomplete="current-password"]', password);
+    await page.type('input[autocomplete="username"]', account);
+    await page.type('input[autocomplete="current-password"]', password);
 // 登录按钮
-await page.click('.hhGKQA')
-
+    await page.click('.hhGKQA')
+}
 // 搜索框
 await page.waitForSelector('input[placeholder="搜索作品"]');
+
+const PHPSESSID = await page.cookies()
+await fs.writeFileSync('PHPSESSID.txt',PHPSESSID.find(v=>v.name === 'PHPSESSID').value,{flag:'w'})
+
 // 输入信息
 await page.type('input[placeholder="搜索作品"]', username)
 // 回车
@@ -134,6 +145,7 @@ const pages = () => {
             // 文件所在目录
             fs.readdir(path.join(`${process.cwd()}/uploadUser/${username}/`), function (err, files) {
                 if (err) {
+                    console.log(path.join(`${process.cwd()}/uploadUser/${username}/`), err)
                     return;
                 }
                 files.forEach(item => {

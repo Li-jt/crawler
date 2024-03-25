@@ -11,3 +11,4 @@
 /uploadUser/
 /logs/
 .env
+PHPSESSID.txt

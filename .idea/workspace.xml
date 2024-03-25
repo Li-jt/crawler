@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a1b4d19-8404-4b34-9dc5-0158a7a458a8" name="更改" comment="搜索">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PHPSESSID.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rmSync.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/rmSync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +83,12 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="npm.user">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.rmSync">
     <configuration name="rmSync.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/rmSync.js" working-dir="$PROJECT_DIR$/src">
       <method v="2" />
     </configuration>
@@ -116,10 +127,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.rmSync" />
         <item itemvalue="npm.user" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.test.js" />
-        <item itemvalue="npm.rmSync" />
         <item itemvalue="Node.js.rmSync.js" />
       </list>
     </recent_temporary>
@@ -249,7 +260,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711340559497</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="搜索">
+      <option name="closed" value="true" />
+      <created>1711340706397</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1711340706397</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
