@@ -1,13 +1,10 @@
 import xCrawl from "x-crawl";
 import * as readline from 'node:readline/promises';
 import {stdin as input, stdout as output} from 'node:process';
-import {globalLogger} from "./logger/index.js";
-import moment from "moment/moment.js";
 import path from "path";
-import {fileURLToPath} from 'url';
-import axios from "axios";
-import {download} from "./download.js";
 import fs from "node:fs";
+import dotenv from 'dotenv'
+dotenv.config()
 
 // 判断元素是否可见
 const isNotHidden = async (el) => await page.$eval(el, (elem) => {
@@ -36,15 +33,18 @@ if (isUserId == 1) {
     process.exit();
 }
 const username = await rl.question('画师：');
-const account = await rl.question('请输入账号：')
-const password = await rl.question('请输入密码：')
+// const account = await rl.question('请输入账号：')
+// const password = await rl.question('请输入密码：')
 
 rl.close();
+
+const account = process.env.ACCOUNT
+const password = process.env.PASSWORD
 
 // 2.创建一个爬虫实例
 const myXCrawl = xCrawl({
     maxRetry: 3,
-    intervalTime: {max: 2000, min: 1000},
+    intervalTime: {max: 3000, min: 1000},
     timeout: 3000000,
     enableRandomFingerprint: true,
     crawlPage: {puppeteerLaunch: {headless: false},}
@@ -52,7 +52,8 @@ const myXCrawl = xCrawl({
 
 const {data: {browser, page}} = await myXCrawl.crawlPage({
     url: 'https://www.pixiv.net/',
-    viewport: {width: 1920 * 2, height: 1080 * 2},
+    viewport: {width: 1920, height: 1080},
+    timeout: 3000000,
     onCrawlItemComplete(crawlPageSingleResult) {
         const {page} = crawlPageSingleResult.data
 
@@ -66,7 +67,6 @@ await page.click('.signup-form__submit--login')
 
 // 等待页面元素出现
 await page.waitForSelector('.brNKPG')
-
 // 登录
 await page.type('input[autocomplete="username"]', account);
 await page.type('input[autocomplete="current-password"]', password);
@@ -74,9 +74,9 @@ await page.type('input[autocomplete="current-password"]', password);
 await page.click('.hhGKQA')
 
 // 搜索框
-await page.waitForSelector('.eOTMOA');
+await page.waitForSelector('input[placeholder="搜索作品"]');
 // 输入信息
-await page.type('.eOTMOA', username)
+await page.type('input[placeholder="搜索作品"]', username)
 // 回车
 await page.keyboard.press('Enter')
 if (isUserId == 3) {

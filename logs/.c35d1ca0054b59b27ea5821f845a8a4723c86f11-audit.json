@@ -24,6 +24,11 @@
             "date": 1711252791865,
             "name": "logs\\authLog-2024-03-24.log",
             "hash": "7c521b391b1ddefb7c5043040ad11be58b334ee1ff0f95350d344a358cd5f7e4"
+        },
+        {
+            "date": 1711336940351,
+            "name": "logs/authLog-2024-03-25.log",
+            "hash": "80449ab8f2440e7546be966fbd4c8aef0e119d3a07df4296aafa5fa99ba817cc"
         }
     ],
     "hashType": "sha256"
