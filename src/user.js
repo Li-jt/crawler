@@ -45,12 +45,12 @@ const myXCrawl = xCrawl({
     intervalTime: {max: 3000, min: 1000},
     timeout: 3000000,
     enableRandomFingerprint: true,
-    crawlPage: {puppeteerLaunch: {headless: false},}
+    crawlPage: {puppeteerLaunch: {headless: true},}
 })
 
 const {data: {browser, page}} = await myXCrawl.crawlPage({
     url: 'https://www.pixiv.net/',
-    viewport: {width: 1920, height: 1080},
+    viewport: {width: 1920 * 2, height: 1080 * 2},
     timeout: 3000000,
     onCrawlItemComplete(crawlPageSingleResult) {
         const {page} = crawlPageSingleResult.data
@@ -124,11 +124,16 @@ if (isUserId == 3) {
 const pages = () => {
     return new Promise(resolve => {
         setTimeout(async () => {
+            await page.evaluate(_=>{
+                window.scrollBy(0, window.innerHeight);
+            })
             // 获取页面图片的 URL
             const urls = await page.$$eval('section ul a.iUsZyY img', (el) => el.map(v => ({
                 url: v.getAttribute('src'), title: v.getAttribute('alt'), num: 0
             })))
             const as = await page.$$('section ul a.iUsZyY')
+            console.log(urls.length,as.length)
+
             for (const v of as) {
                 const i = as.indexOf(v);
                 const dom1 = await v.$('div:nth-child(2)')
