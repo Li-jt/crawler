@@ -26,7 +26,11 @@ if (isUserId == 1) {
     console.log('暂无开发此搜索')
     process.exit();
 }
+let type = 1
 const username = await rl.question('画师：');
+if(isUserId == 2){
+    type = await rl.question('类型（1:全部，2:全年龄，3:R-18）：');
+}
 // const account = await rl.question('请输入账号：')
 // const password = await rl.question('请输入密码：')
 
@@ -41,12 +45,12 @@ const myXCrawl = xCrawl({
     intervalTime: {max: 3000, min: 1000},
     timeout: 3000000,
     enableRandomFingerprint: true,
-    crawlPage: {puppeteerLaunch: {headless: true},}
+    crawlPage: {puppeteerLaunch: {headless: false},}
 })
 
 const {data: {browser, page}} = await myXCrawl.crawlPage({
     url: 'https://www.pixiv.net/',
-    viewport: {width: 1920 * 2, height: 1080 * 2},
+    viewport: {width: 1920, height: 1080},
     timeout: 3000000,
     onCrawlItemComplete(crawlPageSingleResult) {
         const {page} = crawlPageSingleResult.data
@@ -106,6 +110,15 @@ if (isUserId == 3) {
 } else if (isUserId == 2) {
     // 等待搜索结果
     await page.waitForSelector(doms[isUserId])
+    if(type == 2){
+        await page.click('.bduUXU>div>a:nth-child(2)')
+        await page.reload()
+        await page.waitForSelector(doms[isUserId])
+    }else if(type == 3){
+        await page.click('.bduUXU>div>a:nth-child(3)')
+        await page.reload()
+        await page.waitForSelector(doms[isUserId])
+    }
 }
 // 开始爬取
 const pages = () => {
