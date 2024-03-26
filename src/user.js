@@ -41,7 +41,7 @@ const myXCrawl = xCrawl({
     intervalTime: {max: 3000, min: 1000},
     timeout: 3000000,
     enableRandomFingerprint: true,
-    crawlPage: {puppeteerLaunch: {headless: false},}
+    crawlPage: {puppeteerLaunch: {headless: true},}
 })
 
 const {data: {browser, page}} = await myXCrawl.crawlPage({
