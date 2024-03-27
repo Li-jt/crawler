@@ -29,6 +29,16 @@
             "date": 1711336940351,
             "name": "logs/authLog-2024-03-25.log",
             "hash": "80449ab8f2440e7546be966fbd4c8aef0e119d3a07df4296aafa5fa99ba817cc"
+        },
+        {
+            "date": 1711451951201,
+            "name": "logs/authLog-2024-03-26.log",
+            "hash": "6753131e7e2d338ba91f4b3181d6c14869c07f8137d4476e827870ac2e32018c"
+        },
+        {
+            "date": 1711515218956,
+            "name": "logs/authLog-2024-03-27.log",
+            "hash": "50b9a7595ededf8f32ee91ef61dd5dac6a93b4bc967f3fed0ad86d608651df9d"
         }
     ],
     "hashType": "sha256"

@@ -37,10 +37,11 @@ const getData = async (params) => {
     globalLogger.info(JSON.stringify(pageResults))
     const list = pageResults.data.data.contents.map((item) => {
         if(item.illust_page_count > 1){
-            return [...new Array(item.illust_page_count).keys()].map((_, i) => {
+            return [...new Array(Number(item.illust_page_count)).keys()].map((_, i) => {
                 return {
                     ...item,
-                    url: item.url.replace('_p0',`_p${i}`)
+                    url: item.url.replace('_p0',`_p${i}`),
+                    title: `${item.title} -- ${i}`,
                 }
             })
         }else{
@@ -120,6 +121,10 @@ const getImg = async function ({arr, index, from}, suffix = '.png') {
             }
         }
     } catch (e) {
-        await getImg({arr, index, from}, '.jpg')
+        if(suffix == '.jpg'){
+            await getImg({arr, index, from}, '.gif')
+        }else if(suffix == '.png'){
+            await getImg({arr, index, from}, '.jpg')
+        }
     }
 }
