@@ -4,7 +4,7 @@ import {stdin as input, stdout as output} from 'node:process';
 import path from "path";
 import fs from "node:fs";
 import dotenv from 'dotenv'
-import {addressConversion} from "../utils/index.js";
+import {addressConversion, nameProcessing} from "../utils/index.js";
 
 dotenv.config()
 
@@ -14,7 +14,7 @@ const isNotHidden = async (el) => await page.$eval(el, (elem) => {
 })
 
 const doms = {
-    2: 'section ul.hdRpMN', 3: '.cDZIoX'
+    1: '.cDZIoX', 2: 'section ul.hdRpMN', 3: '.cDZIoX'
 }
 
 const rl = readline.createInterface({input, output});
@@ -22,13 +22,9 @@ const rl = readline.createInterface({input, output});
 // const username = 'torino';
 let index = 1
 const isUserId = await rl.question('搜索方式(1:画师id;2:搜索;3:进入画师详情)：')
-if (isUserId == 1) {
-    console.log('暂无开发此搜索')
-    process.exit();
-}
 let type = 1
-const username = await rl.question('画师：');
-if(isUserId == 2){
+let username = await rl.question('作品或用户id：');
+if (isUserId == 2) {
     type = await rl.question('类型（1:全部，2:全年龄，3:R-18）：');
 }
 // const account = await rl.question('请输入账号：')
@@ -45,7 +41,7 @@ const myXCrawl = xCrawl({
     intervalTime: {max: 3000, min: 1000},
     timeout: 3000000,
     enableRandomFingerprint: true,
-    crawlPage: {puppeteerLaunch: {headless: true},}
+    crawlPage: {puppeteerLaunch: {headless: false},}
 })
 
 const {data: {browser, page}} = await myXCrawl.crawlPage({
@@ -82,49 +78,57 @@ if (read) {
 // 登录按钮
     await page.click('.hhGKQA')
 }
-// 搜索框
-await page.waitForSelector('input[placeholder="搜索作品"]', {timeout: 3000000});
-
-const PHPSESSID = await page.cookies()
-await fs.writeFileSync('PHPSESSID.txt', PHPSESSID.find(v => v.name === 'PHPSESSID').value, {flag: 'w'})
-
-// 输入信息
-await page.type('input[placeholder="搜索作品"]', username)
-// 回车
-await page.keyboard.press('Enter')
-if (isUserId == 3) {
-// 等待搜索结果
-    await page.waitForSelector('.dkVwKe')
-    // 点击作品进入作品详情页
-    await page.click('.dkVwKe')
-// 等待作品详情页画师出现
-    await page.waitForSelector('.kKKMtg a')
-// 点击画师进入画师详情页
-    await page.click('.kKKMtg a')
-// 等待tabs切换
-    await page.waitForSelector('nav')
-// 点击插画tab
-    await page.click('nav a:nth-child(2)')
+if (isUserId == 1) {
+    await page.goto(`https://www.pixiv.net/users/${username}/illustrations`)
 // 等待插画出现
     await page.waitForSelector(doms[isUserId])
-} else if (isUserId == 2) {
-    // 等待搜索结果
-    await page.waitForSelector(doms[isUserId])
-    if(type == 2){
-        await page.click('.bduUXU>div>a:nth-child(2)')
-        await page.reload()
+    username = await page.$eval('h1.ibhMns',el=>el.innerText)
+} else {
+    // 搜索框
+    await page.waitForSelector('input[placeholder="搜索作品"]', {timeout: 3000000});
+
+    const PHPSESSID = await page.cookies()
+    await fs.writeFileSync('PHPSESSID.txt', PHPSESSID.find(v => v.name === 'PHPSESSID').value, {flag: 'w'})
+
+// 输入信息
+    await page.type('input[placeholder="搜索作品"]', username)
+// 回车
+    await page.keyboard.press('Enter')
+    if (isUserId == 3) {
+// 等待搜索结果
+        await page.waitForSelector('.dkVwKe')
+        // 点击作品进入作品详情页
+        await page.click('.dkVwKe')
+// 等待作品详情页画师出现
+        await page.waitForSelector('.kKKMtg a')
+// 点击画师进入画师详情页
+        await page.click('.kKKMtg a')
+// 等待tabs切换
+        await page.waitForSelector('nav')
+// 点击插画tab
+        await page.click('nav a:nth-child(2)')
+// 等待插画出现
         await page.waitForSelector(doms[isUserId])
-    }else if(type == 3){
-        await page.click('.bduUXU>div>a:nth-child(3)')
-        await page.reload()
+    } else if (isUserId == 2) {
+        // 等待搜索结果
         await page.waitForSelector(doms[isUserId])
+        if (type == 2) {
+            await page.click('.bduUXU>div>a:nth-child(2)')
+            await page.reload()
+            await page.waitForSelector(doms[isUserId])
+        } else if (type == 3) {
+            await page.click('.bduUXU>div>a:nth-child(3)')
+            await page.reload()
+            await page.waitForSelector(doms[isUserId])
+        }
     }
 }
+
 // 开始爬取
 const pages = () => {
     return new Promise(resolve => {
         setTimeout(async () => {
-            await page.evaluate(_=>{
+            await page.evaluate(_ => {
                 window.scrollBy(0, window.innerHeight);
             })
             // 获取页面图片的 URL
@@ -132,7 +136,7 @@ const pages = () => {
                 url: v.getAttribute('src'), title: v.getAttribute('alt'), num: 0
             })))
             const as = await page.$$('section ul a.iUsZyY')
-            console.log(urls.length,as.length)
+            console.log(urls.length, as.length)
 
             for (const v of as) {
                 const i = as.indexOf(v);
@@ -146,9 +150,10 @@ const pages = () => {
             }
             const apis = urls.map((item => {
                 if (item.num) {
-                    return [...new Array(item.num).keys()].map((v,i) => {
+                    return [...new Array(item.num).keys()].map((v, i) => {
                         return {
                             url: addressConversion(item.url, i),
+                            title: nameProcessing(`【${item.title}--${Number(i)}】`),
                             maxRetry: 1,
                             method: 'GET',
                             responseType: 'arraybuffer',
@@ -159,6 +164,7 @@ const pages = () => {
                 } else {
                     return {
                         url: addressConversion(item.url),
+                        title: nameProcessing(`【${item.title}--${Number(0)}】`),
                         maxRetry: 1,
                         method: 'GET',
                         responseType: 'arraybuffer',
@@ -167,8 +173,9 @@ const pages = () => {
                     }
                 }
             })).flat(Infinity)
+            let fileNames = apis.map(v=>v.title)
             const data = await myXCrawl.crawlFile({
-                targets: apis, storeDirs: `${process.cwd()}/uploadUser/${username}`, // 存放文件夹
+                targets: apis,fileNames, storeDirs: `${process.cwd()}/uploadUser/${username}`, // 存放文件夹
             })
 
             const proxyApi = data.filter(v => v.data.statusCode !== 200).map(v => v.id)
@@ -177,9 +184,9 @@ const pages = () => {
                     ...apis[v - 1], url: `${apis[v - 1].url.slice(0, apis[v - 1].url.lastIndexOf('.'))}.png`,
                 }
             })
-
+            fileNames = apis2.map(v=>v.title)
             await myXCrawl.crawlFile({
-                targets: apis2, storeDirs: `${process.cwd()}/uploadUser/${username}`, // 存放文件夹
+                targets: apis2,fileNames, storeDirs: `${process.cwd()}/uploadUser/${username}`, // 存放文件夹
             })
 
             // 文件所在目录
@@ -210,6 +217,8 @@ pages().then(r => {
     console.log(r)
 })
 
-
+// https://gd-hbimg.huaban.com/6109781d7882105d8cd211c878e50845a94b33ec3deb7-odfK71_fw1200
+// https://gd-hbimg.huaban.com/6109781d7882105d8cd211c878e50845a94b33ec3deb7-odfK71_fw480webp
+// https://gd-hbimg.huaban.com/6109781d7882105d8cd211c878e50845a94b33ec3deb7-odfK71_fw240webp
 
 
